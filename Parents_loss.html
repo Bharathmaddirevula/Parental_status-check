@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parental Status Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Parental Status Checker</h2>
+    <form id="statusForm">
+      <label for="name">Enter Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="father">Father Alive?</label>
+      <select id="father">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="mother">Mother Alive?</label>
+      <select id="mother">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <button type="submit">Check</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById("statusForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const father = document.getElementById("father").value;
+      const mother = document.getElementById("mother").value;
+      const result = document.getElementById("result");
+
+      if (father === "no" && mother === "no") {
+        result.textContent = `${name} has lost both parents.`;
+        result.style.color = "red";
+      } else if (father === "no" || mother === "no") {
+        result.textContent = `${name} has lost one parent.`;
+        result.style.color = "orange";
+      } else {
+        result.textContent = `${name} has both parents alive.`;
+        result.style.color = "green";
+      }
+    });
+  </script>
+</body>
+</html>
